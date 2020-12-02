@@ -20,14 +20,28 @@ class _TimerListScreenState extends State<TimerListScreen> {
   }
 
   void _navigateAndAwaitNewTimer(BuildContext context) async {
-    final NewTimerArguments args = await Navigator.push(
+    final Timer timer = await Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => NewTimerScreen())
     );
 
-    if (args != null) {
+    if (timer != null) {
       setState(() {
-        _timers.add(Timer(args.name, args.duration));
+        _timers.add(timer);
+      });
+    }
+  }
+
+  void _navigateAndAwaitTimerEdit(BuildContext context, int index) async {
+    final edit = _timers[index];
+    final Timer timer = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (c) => NewTimerScreen(timer: edit))
+    );
+
+    if (timer != null) {
+      setState(() {
+        _timers[index] = timer;
       });
     }
   }
@@ -89,7 +103,7 @@ class _TimerListScreenState extends State<TimerListScreen> {
                       caption: "Edit",
                       icon: Icons.edit,
                       color: Colors.green,
-                      onTap: () {}
+                      onTap: () => _navigateAndAwaitTimerEdit(context, index)
                   )
                 ]
               ),
