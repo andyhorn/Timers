@@ -52,6 +52,7 @@ class _TimerListScreenState extends State<TimerListScreen> {
           return Column(
             children: [
               Slidable(
+                key: UniqueKey(),
                 child: _timers[index],
                 actionPane: SlidableDrawerActionPane(),
                 secondaryActions: [
@@ -59,9 +60,30 @@ class _TimerListScreenState extends State<TimerListScreen> {
                       caption: "Delete",
                       icon: Icons.highlight_remove,
                       color: Colors.redAccent,
-                      onTap: () => setState(() {
-                        _timers.removeAt(index);
-                      })
+                      onTap: () {
+                        final _dialog = AlertDialog(
+                          title: Text("Delete Timer?"),
+                          actions: [
+                            FlatButton(
+                              child: Text("Yes, delete."),
+                              onPressed: () {
+                                setState(() {
+                                  _timers.removeAt(index);
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            FlatButton(
+                              child: Text("No, keep this timer."),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }
+                            )
+                          ],
+                        );
+
+                        showDialog(context: context, builder: (c) => _dialog);
+                      }
                   ),
                   IconSlideAction(
                       caption: "Edit",

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 
 import '../models/new_timer_arguments.dart';
 
@@ -85,7 +84,6 @@ class _NewTimerFormState extends State<NewTimerForm> {
           Expanded(
             child: Container(
               alignment: Alignment.bottomCenter,
-              
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -94,7 +92,8 @@ class _NewTimerFormState extends State<NewTimerForm> {
                     child: Text("Save", style: TextStyle(color: Colors.white)),
                     color: Colors.green,
                     elevation: 5,
-
+                    disabledElevation: 1,
+                    disabledColor: Colors.grey,
                     onPressed: _duration.inSeconds > 0 && _name.isNotEmpty
                       ? () => Navigator.pop(context, NewTimerArguments(_name, _duration))
                       : null
