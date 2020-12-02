@@ -56,6 +56,55 @@ class _TimerListScreenState extends State<TimerListScreen> {
             color: Colors.white,
             tooltip: "Add new timer",
             onPressed: () => _navigateAndAwaitNewTimer(context),
+          ),
+          IconButton(
+            icon: Icon(Icons.help_outline),
+            color: Colors.white,
+            tooltip: "Help",
+            onPressed: () {
+              showDialog(context: context, builder: (c) {
+                return AlertDialog(
+                  title: Text("How Does This Work?"),
+                  content: Wrap(
+                    children: [
+                      Text("Follow these tips to get started!",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      BulletedTextList(points: [
+                        "Tap the '+' icon to create a new timer",
+                        "Tap a timer to start the countdown",
+                        "Tap a running timer again to pause",
+                        "Press and hold a timer to reset",
+                        "Swipe a row for more options"
+                      ]),
+                      Divider(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(Icons.copyright, size: 10),
+                          Text(" 2020 - Andrew Horn", style: TextStyle(
+                            fontSize: 10,
+                          ))
+                        ],
+                      )
+                    ],
+                  ),
+                  actions: [
+                    FlatButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }
+                    )
+                  ],
+                );
+              });
+            }
           )
         ],
       ),
@@ -113,7 +162,38 @@ class _TimerListScreenState extends State<TimerListScreen> {
             ],
           );
         },
-      )
+      ),
+    );
+  }
+}
+
+class BulletedTextList extends StatelessWidget {
+  final _bullets = <Text>[];
+
+  Text _makeBulletPoint(String item) {
+    return Text("• $item", key: UniqueKey(), style: TextStyle(
+      fontSize: 16,
+    ));
+  }
+
+  BulletedTextList({ List<String> points }) {
+    if (points == null) return;
+
+    for (final point in points) {
+      _bullets.add(_makeBulletPoint(point));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 15, left: 8),
+      child: Wrap(
+        children: _bullets.map((p) => Container(
+            padding: EdgeInsets.symmetric(vertical: 3, horizontal: 2),
+            child: p
+        )).toList()
+      ),
     );
   }
 }
