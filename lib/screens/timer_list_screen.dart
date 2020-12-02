@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
 
-// import '../models/timer_collection_model.dart';
 import '../models/timer.dart';
 import '../models/new_timer_arguments.dart';
 import 'new_timer_screen.dart';

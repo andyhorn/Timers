@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'dart:async' as da;
-
-import 'timer_collection_model.dart';
 
 class Timer extends StatefulWidget {
   final String name;
@@ -15,13 +11,12 @@ class Timer extends StatefulWidget {
   Timer(this.name, this.duration);
 
   @override
-  _TimerState createState() => _TimerState(this.name, this.duration, this.id);
+  _TimerState createState() => _TimerState(this.name, this.duration);
 }
 
 class _TimerState extends State<Timer> {
   final String _name;
   final Duration _duration;
-  final Uuid _id;
   final TextStyle _largeText = TextStyle(fontSize: 18);
   final Duration _interval = Duration(seconds: 1);
   Duration _timeRemaining;
@@ -29,7 +24,7 @@ class _TimerState extends State<Timer> {
   bool _isRunning;
   da.Timer _intervalFunc;
 
-  _TimerState(this._name, this._duration, this._id);
+  _TimerState(this._name, this._duration);
 
   @override
   void initState() {
