@@ -44,6 +44,7 @@ class _NewTimerFormState extends State<NewTimerForm> {
                 Text("Name", style: _labelStyle),
                 TextFormField(
                   key: _nameKey,
+                  autofocus: true,
                   decoration: InputDecoration(
                     hintText: "Timer Name",
                     border: UnderlineInputBorder(
