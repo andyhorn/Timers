@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:async' as da;
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 class Timer extends StatefulWidget {
   final String name;
@@ -19,6 +21,7 @@ class _TimerState extends State<Timer> {
   final Duration _duration;
   final TextStyle _largeText = TextStyle(fontSize: 18);
   final Duration _interval = Duration(seconds: 1);
+  final FlutterRingtonePlayer _player = FlutterRingtonePlayer();
   Duration _timeRemaining;
   String _state;
   bool _isRunning;
@@ -72,6 +75,7 @@ class _TimerState extends State<Timer> {
           _timeRemaining = Duration.zero;
           _isRunning = false;
           _state = "expired";
+          FlutterRingtonePlayer.playAlarm();
         });
         t.cancel();
       }
@@ -100,6 +104,8 @@ class _TimerState extends State<Timer> {
       _intervalFunc.cancel();
       _intervalFunc = null;
     }
+
+    FlutterRingtonePlayer.stop();
 
     setState(() {
       _isRunning = false;
