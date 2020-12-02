@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../models/timer.dart';
-import '../models/new_timer_arguments.dart';
 import 'new_timer_screen.dart';
 
 class TimerListScreen extends StatefulWidget {

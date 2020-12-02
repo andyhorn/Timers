@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/new_timer_arguments.dart';
 import '../models/timer.dart';
 
 class NewTimerScreen extends StatelessWidget {
